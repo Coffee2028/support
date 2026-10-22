@@ -6,10 +6,14 @@ import unicodedata
 import urllib.error
 import urllib.request
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, abort
 from flask_cors import CORS
 
 app = Flask(__name__)
+
+# Složka, ve které leží index.html, style.css a script.js
+HERE = os.path.dirname(os.path.abspath(__file__))
+PAGE_FILES = {"style.css", "script.js"}
 
 # Pro školní projekt povolíme CORS všude (později se dá zpřísnit)
 CORS(app)
@@ -212,6 +216,20 @@ def find_reply(message):
 
 @app.get("/")
 def home():
+    """Hlavní adresa ukáže stránku podpory (frontend)."""
+    return send_from_directory(HERE, "index.html")
+
+
+@app.get("/<name>")
+def page_file(name):
+    """Styly a skript stránky. Nic jiného ze složky (třeba app.py) se neposílá."""
+    if name not in PAGE_FILES:
+        abort(404)
+    return send_from_directory(HERE, name)
+
+
+@app.get("/status")
+def status():
     mode = f"Gemini ({GEMINI_MODEL})" if GEMINI_API_KEY else "klíčová slova (bez GEMINI_API_KEY)"
     return f"VDF Support Backend is running – odpovědi: {mode}"
 

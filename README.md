@@ -2,6 +2,8 @@
 
 Webová stránka technické podpory pro herní studio VDF Games. Hráč napíše, jaký má problém se hrou, a podpora mu hned odpoví.
 
+**Online:** https://vdf-games-jakub-2026.onrender.com/ (stránku i backend posílá jeden server na Renderu; stav serveru je na `/status`)
+
 Autor: Jakub (4ITE)
 
 ## Soubory
@@ -9,7 +11,7 @@ Autor: Jakub (4ITE)
 - `index.html` – stránka s formulářem a výpisem odpovědí
 - `style.css` – vzhled (světlý i tmavý režim)
 - `script.js` – odeslání dotazu a vypsání odpovědi
-- `app.py` – backend ve Flasku, endpoint `POST /chat`
+- `app.py` – backend ve Flasku: posílá stránku (`/`) a odpovídá na dotazy (`POST /chat`)
 - `requirements.txt` – knihovny pro backend
 
 ## Jak backend odpovídá
