@@ -1,0 +1,332 @@
+/* ---------- Barvy (světlý a tmavý režim) ---------- */
+:root {
+  --bg: #eceef6;
+  --surface: #ffffff;
+  --ink: #1b1e36;
+  --muted: #5b607c;
+  --line: #cfd3e6;
+  --accent: #4a2fd1;
+  --accent-ink: #ffffff;
+  --gold: #ffc531;
+  --gold-ink: #2a2100;
+
+  /* Dialogové okno odpovědi (jako v RPG hrách) */
+  --dialog-bg: #231a6e;
+  --dialog-ink: #f4f2ff;
+  --dialog-edge: #f4f2ff;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14162a;
+    --surface: #1e2140;
+    --ink: #ecedf8;
+    --muted: #a2a6c6;
+    --line: #353a63;
+    --accent: #9c8bff;
+    --accent-ink: #14162a;
+    --dialog-bg: #2b2380;
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Základ ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Rubik", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+.brand-name,
+button {
+  font-family: "Chakra Petch", "Rubik", system-ui, sans-serif;
+}
+
+/* ---------- Horní lišta ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  width: 26px;
+  height: 26px;
+  fill: var(--accent);
+}
+
+.brand-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.topbar-note {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Obsah ---------- */
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2.1rem, 6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.intro {
+  margin: 0 0 24px;
+  max-width: 34em;
+  color: var(--muted);
+}
+
+/* Rychlé volby */
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.chip {
+  padding: 7px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: "Rubik", system-ui, sans-serif;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+/* Formulář */
+.ask {
+  padding: 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+textarea,
+input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+  margin-bottom: 16px;
+}
+
+.ask-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.field {
+  flex: 1;
+}
+
+button[type="submit"] {
+  padding: 11px 22px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Viditelné zaměření pro ovládání klávesnicí */
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---------- Odpovědi ---------- */
+.log-wrap {
+  margin-top: 40px;
+}
+
+h2 {
+  margin: 0 0 16px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Dotaz uživatele */
+.question {
+  margin: 28px 0 22px;
+  padding-left: 14px;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+
+.question:first-child {
+  margin-top: 0;
+}
+
+.question strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Dialogové okno podpory, dvojitý rámeček jako v RPG */
+.dialog {
+  position: relative;
+  margin: 0 0 8px;
+  padding: 26px 22px 30px;
+  border: 3px solid var(--dialog-edge);
+  border-radius: 10px;
+  background: var(--dialog-bg);
+  color: var(--dialog-ink);
+  box-shadow:
+    0 0 0 3px var(--dialog-bg),
+    inset 0 0 0 3px var(--dialog-bg),
+    inset 0 0 0 4.5px rgba(244, 242, 255, 0.45);
+  white-space: pre-wrap;
+}
+
+.dialog-tag {
+  position: absolute;
+  top: -16px;
+  left: 16px;
+  padding: 3px 12px;
+  border-radius: 6px;
+  background: var(--gold);
+  color: var(--gold-ink);
+  font-family: "Chakra Petch", "Rubik", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.dialog-tag small {
+  margin-left: 6px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+/* Šipka "pokračovat", objeví se po dopsání textu */
+.dialog.done::after {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+  color: var(--gold);
+  font-size: 0.8rem;
+  animation: blink 0.9s steps(2, start) 6;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.dialog.waiting .dialog-text {
+  opacity: 0.8;
+}
+
+/* Text jen pro čtečky obrazovky */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Patička ---------- */
+.footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 560px) {
+  .ask-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar-note {
+    display: none;
+  }
+}
+
+/* Bez animací pro ty, kdo je mají vypnuté */
+@media (prefers-reduced-motion: reduce) {
+  .dialog.done::after {
+    animation: none;
+  }
+}

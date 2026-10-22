@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technická podpora – VDF Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <!-- Jednoduché logo: křížový ovladač (d-pad) -->
+      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z" />
+      </svg>
+      <span class="brand-name">VDF Games</span>
+    </div>
+    <span class="topbar-note">Technická podpora</span>
+  </header>
+
+  <main class="page">
+    <h1>Co se se hrou děje?</h1>
+    <p class="intro">Popiš problém vlastními slovy, nebo vyber jeden z nejčastějších. Podpora ti odpoví hned.</p>
+
+    <!-- Rychlé volby: kliknutím se text vloží do pole s dotazem -->
+    <div class="quick" aria-label="Nejčastější problémy">
+      <button type="button" class="chip" data-text="Hra se mi po spuštění nenačte.">Hra se nespustí</button>
+      <button type="button" class="chip" data-text="Hra mi během hraní padá.">Hra padá</button>
+      <button type="button" class="chip" data-text="Hra se seká a mám nízké FPS.">Nízké FPS</button>
+      <button type="button" class="chip" data-text="Nefunguje mi ovladač.">Nefunguje ovladač</button>
+      <button type="button" class="chip" data-text="Nemůžu se přihlásit ke svému účtu.">Přihlášení k účtu</button>
+    </div>
+
+    <form id="question-form" class="ask">
+      <label for="question">Tvůj dotaz</label>
+      <textarea
+        id="question"
+        rows="4"
+        placeholder="Např.: Po poslední aktualizaci se mi hra nespustí…"
+      ></textarea>
+
+      <div class="ask-row">
+        <div class="field">
+          <label for="email">E-mail (nepovinné)</label>
+          <input type="email" id="email" placeholder="tvuj@email.cz" autocomplete="email">
+        </div>
+        <button type="submit" id="send">Odeslat dotaz</button>
+      </div>
+      <p class="hint" id="hint">Tip: dotaz odešleš i zkratkou Ctrl + Enter.</p>
+    </form>
+
+    <section class="log-wrap" aria-labelledby="log-title">
+      <h2 id="log-title">Odpovědi podpory</h2>
+      <!-- Sem script.js přidává dotazy a odpovědi -->
+      <div id="log" aria-live="polite">
+        <p class="empty" id="empty">Zatím žádný dotaz. Napiš, co se děje, a odpověď se objeví tady.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Školní projekt 4ITE, Jakub</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
