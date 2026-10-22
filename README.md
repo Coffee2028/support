@@ -14,7 +14,11 @@ Autor: Jakub (4ITE)
 
 ## Jak backend odpovídá
 
-`app.py` hledá v dotazu klíčová slova (např. „spustit“, „padá“, „FPS“, „ovladač“) a vrátí odpověď k nejbližšímu tématu. Když nic nesedí, poprosí hráče o víc informací.
+Když je na serveru nastavený klíč `GEMINI_API_KEY`, `app.py` pošle dotaz do Gemini (model `gemini-3.5-flash-lite`, jde změnit proměnnou `GEMINI_MODEL`) s pokynem odpovídat jako podpora VDF Games.
+
+Bez klíče, nebo když Gemini neodpoví, hledá `app.py` v dotazu klíčová slova (např. „spustit“, „padá“, „FPS“, „ovladač“) a vrátí odpověď k nejbližšímu tématu. Když nic nesedí, poprosí hráče o víc informací.
+
+Ochrana: dotaz může mít nejvýš 1000 znaků a z jedné IP adresy jde poslat nejvýš 8 dotazů za minutu.
 
 Požadavek:
 
@@ -43,3 +47,4 @@ Backend poběží na `http://localhost:8000`. V `script.js` pak nastav `USE_BACK
 2. Build command: `pip install -r requirements.txt`
 3. Start command: `gunicorn app:app`
 4. Adresu služby (s `/chat` na konci) vlož do `BACKEND_URL` v `script.js` a nastav `USE_BACKEND = true`.
+5. Volitelně: v záložce **Environment** přidej proměnnou `GEMINI_API_KEY` se svým klíčem z Google AI Studia. Klíč nikdy nedávej do kódu ani na GitHub.

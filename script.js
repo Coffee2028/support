@@ -1,5 +1,5 @@
 // Přepínač: false = demo bez serveru, true = dotazy jdou na backend (app.py)
-const USE_BACKEND = false;
+const USE_BACKEND = true;
 
 // Až nasadíš app.py na Render, vlož sem jeho adresu (s /chat na konci)
 const BACKEND_URL = "https://vdf-games-jakub-2026.onrender.com/chat";
